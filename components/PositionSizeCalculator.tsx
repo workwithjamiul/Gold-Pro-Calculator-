@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from './ui/Card';
 import Input from './ui/Input';
 import Button from './ui/Button';
@@ -39,9 +39,17 @@ const PositionSizeCalculator: React.FC<PositionSizeCalculatorProps> = ({
     riskPercentage,
     onReset,
 }) => {
+
+    const [lotSizeAnimationKey, setLotSizeAnimationKey] = useState(0);
+
+    useEffect(() => {
+        if (lotSize !== null && lotSize > 0) {
+            setLotSizeAnimationKey(prev => prev + 1);
+        }
+    }, [lotSize]);
     
     return (
-        <>
+        <div className="space-y-12">
             <Card
                 title="Step 2: Risk & Sizing"
                 description="Define your risk parameters to calculate the lot size."
@@ -49,7 +57,7 @@ const PositionSizeCalculator: React.FC<PositionSizeCalculatorProps> = ({
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" /></svg>
                 }
             >
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <Input
                         id="accountBalance"
                         label="Account Balance ($)"
@@ -71,9 +79,11 @@ const PositionSizeCalculator: React.FC<PositionSizeCalculatorProps> = ({
                 </div>
 
                 {lotSize !== null && lotSize > 0 && (
-                    <div className="mt-6 p-4 rounded-lg bg-brand-background text-center">
+                    <div className="mt-8 p-4 rounded-lg bg-brand-background text-center">
                         <p className="text-sm text-brand-text-secondary">Recommended Lot Size</p>
-                        <p className="text-3xl font-bold text-brand-accent">
+                        <p 
+                            key={lotSizeAnimationKey}
+                            className="text-3xl font-bold text-brand-accent animate-glow-accent">
                             {lotSize.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                         </p>
                     </div>
@@ -103,7 +113,7 @@ const PositionSizeCalculator: React.FC<PositionSizeCalculatorProps> = ({
                     </div>
                 </Card>
             )}
-        </>
+        </div>
     );
 };
 

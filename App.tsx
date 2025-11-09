@@ -23,8 +23,19 @@ const App: React.FC = () => {
   const [takeProfitPrice, setTakeProfitPrice] = useState<number | null>(null);
   const [lotSize, setLotSize] = useState<number | null>(null);
   const [riskPercentage, setRiskPercentage] = useState<number | null>(null);
+
+  // Animation key for TP price
+  const [tpAnimationKey, setTpAnimationKey] = useState(0);
   
   // --- EFFECTS for REAL-TIME CALCULATION ---
+
+  // Animate TP Price on change
+  useEffect(() => {
+    if (takeProfitPrice !== null) {
+        setTpAnimationKey(prev => prev + 1);
+    }
+  }, [takeProfitPrice]);
+
 
   // Calculate Stop Loss Price from ATR if that method is selected
   useEffect(() => {
@@ -124,11 +135,11 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-brand-background p-4 sm:p-6 lg:p-8">
       <div className="max-w-3xl mx-auto">
-        <header className="text-center mb-8">
+        <header className="text-center mb-12">
           <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
             XAUUSD Pro <span className="text-brand-primary">Calculator</span>
           </h1>
-          <p className="mt-2 text-lg text-brand-text-secondary">
+          <p className="mt-4 text-lg text-brand-text-secondary">
             A step-by-step tool for precise gold trade planning.
           </p>
         </header>
@@ -144,7 +155,6 @@ const App: React.FC = () => {
                 tpMultiplier={tpMultiplier}
                 setTpMultiplier={setTpMultiplier}
                 riskInPoints={riskInPoints}
-                takeProfitPrice={takeProfitPrice}
                 stopLossMethod={stopLossMethod}
                 setStopLossMethod={setStopLossMethod}
                 atrValue={atrValue}
@@ -152,6 +162,17 @@ const App: React.FC = () => {
                 atrMultiplier={atrMultiplier}
                 setAtrMultiplier={setAtrMultiplier}
             />
+
+            {takeProfitPrice !== null && (
+                <div className="p-4 rounded-lg bg-brand-surface text-center">
+                    <p className="text-sm text-brand-text-secondary">Calculated Take Profit Price</p>
+                    <p 
+                        key={tpAnimationKey}
+                        className="text-3xl font-bold text-brand-success animate-glow-success">
+                        ${takeProfitPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                    </p>
+                </div>
+            )}
 
             {takeProfitPrice !== null && (
                 <PositionSizeCalculator

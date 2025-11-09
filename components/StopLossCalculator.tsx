@@ -14,7 +14,6 @@ interface StopLossCalculatorProps {
     tpMultiplier: TPMultiplier | '';
     setTpMultiplier: (value: TPMultiplier | '') => void;
     riskInPoints: number | null;
-    takeProfitPrice: number | null;
     stopLossMethod: StopLossMethod;
     setStopLossMethod: (value: StopLossMethod) => void;
     atrValue: string;
@@ -50,12 +49,11 @@ const StopLossCalculator: React.FC<StopLossCalculatorProps> = ({
     stopLossPrice, setStopLossPrice,
     tradeType, setTradeType,
     tpMultiplier, setTpMultiplier,
-    riskInPoints, takeProfitPrice,
+    riskInPoints,
     stopLossMethod, setStopLossMethod,
     atrValue, setAtrValue,
     atrMultiplier, setAtrMultiplier,
 }) => {
-    
     const isRiskCalculated = riskInPoints !== null && riskInPoints > 0;
     const isAtrMethod = stopLossMethod === StopLossMethod.ATR;
 
@@ -67,7 +65,7 @@ const StopLossCalculator: React.FC<StopLossCalculatorProps> = ({
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" /></svg>
             }
         >
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <Select
                     id="tradeType"
                     label="Trade Type"
@@ -89,7 +87,7 @@ const StopLossCalculator: React.FC<StopLossCalculatorProps> = ({
                 />
             </div>
 
-            <div className="mt-4">
+            <div className="mt-6">
                  <label className="block text-sm font-medium text-brand-text-secondary mb-1">Stop Loss Method</label>
                  <div className="flex">
                     <MethodButton active={stopLossMethod === StopLossMethod.Manual} onClick={() => setStopLossMethod(StopLossMethod.Manual)} position="left">Manual</MethodButton>
@@ -98,7 +96,7 @@ const StopLossCalculator: React.FC<StopLossCalculatorProps> = ({
             </div>
 
             {isAtrMethod && (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 p-4 bg-brand-background rounded-md border border-brand-surface">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6 p-4 bg-brand-background rounded-md border border-brand-surface">
                      <Input
                         id="atrValue"
                         label="ATR Value (Points)"
@@ -135,7 +133,7 @@ const StopLossCalculator: React.FC<StopLossCalculatorProps> = ({
                 </div>
             )}
 
-            <div className="mt-4">
+            <div className="mt-6">
                  <Input
                     id="stopLossPrice"
                     label="Stop Loss Price"
@@ -151,7 +149,7 @@ const StopLossCalculator: React.FC<StopLossCalculatorProps> = ({
 
 
             {isRiskCalculated && (
-                 <div className="mt-4 space-y-4">
+                 <div className="mt-6 space-y-6">
                     <p className="text-sm text-center text-brand-text-secondary">
                         Risk: <span className="font-bold text-brand-danger">{riskInPoints.toFixed(2)} points</span>
                     </p>
@@ -168,15 +166,6 @@ const StopLossCalculator: React.FC<StopLossCalculatorProps> = ({
                         ]}
                     />
                  </div>
-            )}
-            
-            {takeProfitPrice !== null && (
-                <div className="mt-6 p-4 rounded-lg bg-brand-background text-center">
-                    <p className="text-sm text-brand-text-secondary">Calculated Take Profit Price</p>
-                    <p className="text-3xl font-bold text-brand-success">
-                        ${takeProfitPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-                    </p>
-                </div>
             )}
         </Card>
     );
