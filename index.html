@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>XAUUSD Pro Trading Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'brand-primary': '#D4AF37', // Gold
+              'brand-secondary': '#F7DC6F', // Light Gold
+              'brand-background': '#121212', // Dark Charcoal
+              'brand-surface': '#1E1E1E', // Dark Surface
+              'brand-text-primary': '#E0E0E0', // Off-white
+              'brand-text-secondary': '#AAAAAA', // Light gray
+              'brand-accent': '#F7DC6F', // Light Gold accent
+              'brand-success': '#66BB6A', // Green for profit
+              'brand-danger': '#EF5350',   // Red for loss
+            },
+          },
+        },
+      }
+    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
+  }
+}
+</script>
+</head>
+  <body class="bg-brand-background text-brand-text-primary">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
