@@ -10,36 +10,56 @@
         theme: {
           extend: {
             colors: {
-              'brand-primary': '#D4AF37', // Gold
-              'brand-secondary': '#F7DC6F', // Light Gold
-              'brand-background': '#121212', // Dark Charcoal
-              'brand-surface': '#1E1E1E', // Dark Surface
-              'brand-text-primary': '#E0E0E0', // Off-white
-              'brand-text-secondary': '#AAAAAA', // Light gray
-              'brand-accent': '#F7DC6F', // Light Gold accent
-              'brand-success': '#66BB6A', // Green for profit
-              'brand-danger': '#EF5350',   // Red for loss
+              'brand-background': '#000000', // Pure Black
+              'brand-surface': '#1C1C1E',     // iOS Secondary System Fill
+              'brand-input': '#2C2C2E',       // iOS Tertiary System Fill
+              'brand-primary': '#FFD60A',     // iOS System Yellow
+              'brand-text-primary': '#FFFFFF',
+              'brand-text-secondary': '#8E8E93', // iOS System Gray
+              'brand-accent': '#FFD60A',
+              'brand-success': '#30D158',     // iOS Green
+              'brand-danger': '#FF453A',      // iOS Red
+              'brand-border': '#38383A',
             },
+            fontFamily: {
+              sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+            },
+            boxShadow: {
+              'ios': '0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.15)',
+              'glow': '0 0 15px rgba(255, 214, 10, 0.3)',
+            }
           },
         },
       }
     </script>
     <style>
       @keyframes glow-success {
-        0% { text-shadow: 0 0 0px rgba(102, 187, 106, 0); }
-        50% { text-shadow: 0 0 10px rgba(102, 187, 106, 0.9); }
-        100% { text-shadow: 0 0 0px rgba(102, 187, 106, 0); }
+        0% { text-shadow: 0 0 0px rgba(48, 209, 88, 0); }
+        50% { text-shadow: 0 0 15px rgba(48, 209, 88, 0.8); }
+        100% { text-shadow: 0 0 0px rgba(48, 209, 88, 0); }
       }
       @keyframes glow-accent {
-        0% { text-shadow: 0 0 0px rgba(247, 220, 111, 0); }
-        50% { text-shadow: 0 0 10px rgba(247, 220, 111, 0.9); }
-        100% { text-shadow: 0 0 0px rgba(247, 220, 111, 0); }
+        0% { text-shadow: 0 0 0px rgba(255, 214, 10, 0); }
+        50% { text-shadow: 0 0 15px rgba(255, 214, 10, 0.8); }
+        100% { text-shadow: 0 0 0px rgba(255, 214, 10, 0); }
+      }
+      @keyframes glow-danger {
+        0% { text-shadow: 0 0 0px rgba(255, 69, 58, 0); }
+        50% { text-shadow: 0 0 15px rgba(255, 69, 58, 0.8); }
+        100% { text-shadow: 0 0 0px rgba(255, 69, 58, 0); }
       }
       .animate-glow-success {
         animation: glow-success 1s ease-in-out;
       }
       .animate-glow-accent {
         animation: glow-accent 1s ease-in-out;
+      }
+      .animate-glow-danger {
+        animation: glow-danger 1s ease-in-out;
+      }
+      body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
     </style>
   <script type="importmap">
@@ -52,7 +72,7 @@
 }
 </script>
 </head>
-  <body class="bg-brand-background text-brand-text-primary">
+  <body class="bg-brand-background text-brand-text-primary selection:bg-brand-primary selection:text-black">
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>

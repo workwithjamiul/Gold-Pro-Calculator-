@@ -133,14 +133,14 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-brand-background p-4 sm:p-6 lg:p-8">
-      <div className="max-w-3xl mx-auto">
-        <header className="text-center mb-12">
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight">
-            XAUUSD Pro <span className="text-brand-primary">Calculator</span>
+    <div className="min-h-screen bg-brand-background p-4 sm:p-6 lg:p-8 font-sans">
+      <div className="max-w-2xl mx-auto space-y-10">
+        <header className="text-center pt-8 pb-4">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-white tracking-tight mb-3">
+            XAUUSD <span className="text-brand-primary">Pro</span>
           </h1>
-          <p className="mt-4 text-lg text-brand-text-secondary">
-            A step-by-step tool for precise gold trade planning.
+          <p className="text-brand-text-secondary font-medium text-lg">
+            Professional Trading Calculator
           </p>
         </header>
         
@@ -164,11 +164,12 @@ const App: React.FC = () => {
             />
 
             {takeProfitPrice !== null && (
-                <div className="p-4 rounded-lg bg-brand-surface text-center">
-                    <p className="text-sm text-brand-text-secondary">Calculated Take Profit Price</p>
+                <div className="bg-brand-surface rounded-2xl p-6 text-center border border-brand-border/30 shadow-ios relative overflow-hidden group">
+                    <div className="absolute inset-0 bg-brand-success/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <p className="text-xs font-bold uppercase tracking-widest text-brand-text-secondary mb-2">Projected Take Profit</p>
                     <p 
                         key={tpAnimationKey}
-                        className="text-3xl font-bold text-brand-success animate-glow-success">
+                        className="text-4xl font-bold text-brand-success animate-glow-success drop-shadow-[0_0_10px_rgba(48,209,88,0.2)]">
                         ${takeProfitPrice.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                     </p>
                 </div>
@@ -192,8 +193,8 @@ const App: React.FC = () => {
             )}
         </main>
 
-        <footer className="text-center mt-12 text-brand-text-secondary text-sm">
-            <p>&copy; {new Date().getFullYear()} Pro Trading Tools. All rights reserved.</p>
+        <footer className="text-center pb-8 pt-4">
+            <p className="text-brand-text-secondary/50 text-xs font-medium uppercase tracking-widest">Designed for Professional Traders</p>
         </footer>
       </div>
     </div>
